@@ -1,0 +1,104 @@
+---
+import StatCard from "./StatCard.astro";
+import MatchCard from "./MatchCard.astro";
+
+const API_KEY = import.meta.env.FACEIT_API_KEY;
+const headers = { Authorization: `Bearer ${API_KEY}` };
+const nickStreamer = "Trex_G";
+
+
+const fetchFaceit = async (url: string) => {
+  const res = await fetch(url, { headers });
+  return res.json();
+};
+
+//JUGADOR
+const jugador = await fetchFaceit(
+  `https://open.faceit.com/data/v4/players?nickname=${nickStreamer}&game=cs2`
+);
+
+const nivel = jugador.games?.cs2?.skill_level ?? "N/A";
+const elo = jugador.games?.cs2?.faceit_elo ?? "N/A";
+const playerId = jugador.player_id;
+
+//STATS
+const stats = await fetchFaceit(
+  `https://open.faceit.com/data/v4/players/${playerId}/stats/cs2`
+);
+const stat = stats.lifetime ?? {};
+
+const winRate = stat["Win Rate %"] ?? "N/A";
+const kd = stat["Average K/D Ratio"] ?? "N/A";
+const adr = stat["ADR"] ?? "N/A";
+const partidas = stat["Matches"] ?? "N/A";
+
+
+// HISTORIAL + MAPAS
+const historial = await fetchFaceit(
+  `https://open.faceit.com/data/v4/players/${playerId}/history?game=cs2&limit=5`
+);
+const partidasJugadas = historial.items ?? [];
+
+const partidasConMapa = await Promise.all(
+  partidasJugadas.map(async (partida: any) => {
+    const detalle = await fetchFaceit(
+      `https://open.faceit.com/data/v4/matches/${partida.match_id}`
+    );
+    return { ...partida, detalle };
+  })
+);
+
+---
+
+<section class=" text-white">
+  <div class="mx-auto max-w-6xl my-5">
+
+    <div class="flex items-center gap-4">
+        <div class="h-8 w-1.5 bg-yellow-500"></div>
+        <h1 class="text-4xl font-black uppercase tracking-wide">Estadísticas</h1>
+        <span class="rounded bg-orange-500 px-3 py-1.5 text-sm font-bold uppercase tracking-wide text-black">FACEIT</span>
+    </div>
+
+    <div class="mt-8">
+        <div class="grid gap-4 md:grid-cols-4">
+            <div class="row-span-2 col-span-2 flex flex-col items-center justify-center border border-red-500/40 bg-zinc-900 p-6 [clip-path:polygon(16px_0,100%_0,100%_calc(100%-16px),calc(100%-16px)_100%,0_100%,0_16px)]">
+              <div class="relative flex h-20 w-20 items-center justify-center">
+                <div class="absolute inset-0 rotate-45 bg-gradient-to-br from-[#FF1E3C] to-[#B00020]"></div>
+                <span class="relative font-mono text-3xl font-black">{nivel}</span>
+              </div>
+              <p class="mt-4 text-sm uppercase tracking-widest text-zinc-400">Nivel Faceit</p>
+              <p class="mt-3 font-mono text-3xl font-black text-yellow-500">{elo}</p>
+              <p class="text-xs uppercase tracking-widest text-zinc-500">ELO</p>
+            </div>
+            
+            <StatCard valor={`${winRate}%`} etiqueta="Win Rate" />
+            <StatCard valor={kd} etiqueta="K/D Ratio" />
+            <StatCard valor={adr} etiqueta="ADR" />
+            <StatCard valor={partidas} etiqueta="Partidas" />
+        </div>
+    </div>
+
+    <div class="flex items-center gap-4 py-6">
+        <div class="h-8 w-1.5 bg-yellow-500"></div>
+        <h1 class="text-4xl font-black uppercase tracking-wide">últimas Partidas</h1>
+    </div>
+      <div class="mt-8 grid grid-cols-2 gap-4 md:grid-cols-5">
+        {partidasConMapa.map((partida: any) => {
+          const enF1 = partida.teams?.faction1?.players?.some((p: any) => p.player_id === playerId);
+          const miFaccion = enF1 ? "faction1" : "faction2";
+          const gano = partida.results?.winner === miFaccion;
+          const score = partida.results?.score;
+          const marcador = score ? `${score.faction1}-${score.faction2}` : "-";
+          const mapa = partida.detalle?.voting?.map?.pick ?? "N/A";
+
+          return (
+            <MatchCard
+              resultado={gano ? "W" : "L"}
+              marcador={marcador}
+              mapa={mapa}
+            />
+          );
+        })}
+      </div>
+  </div>
+</section>

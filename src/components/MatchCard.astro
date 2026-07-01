@@ -1,0 +1,13 @@
+---
+const { resultado, marcador, mapa } = Astro.props;
+const gano = resultado === "W";
+---
+<div class="relative flex flex-col items-center border border-zinc-700 bg-zinc-900 p-4 [clip-path:polygon(14px_0,100%_0,100%_calc(100%-14px),calc(100%-14px)_100%,0_100%,0_14px)]">
+
+  <!-- la barrita lateral, pegada a la izquierda -->
+  <span class={`absolute left-0 top-0 h-full w-1.5 ${gano ? "bg-green-500" : "bg-red-500"}`}></span>
+
+  <span class={`font-mono text-2xl font-black ${gano ? "text-green-500" : "text-red-500"}`}>{resultado}</span>
+  <span class="mt-1 font-mono text-sm text-white">{marcador}</span>
+  <span class="mt-1 text-xs text-zinc-400">{mapa}</span>
+</div>
