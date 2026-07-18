@@ -1,0 +1,17 @@
+---
+const { nombre, logo_url, link } = Astro.props;
+---
+<a href={link || "#"} target="_blank" class="block">
+  <div class="flex items-center gap-6 border border-red-500/50 bg-zinc-900 p-6 [clip-path:polygon(16px_0,100%_0,100%_calc(100%-16px),calc(100%-16px)_100%,0_100%,0_16px)]">
+    <div class="h-1 w-12 bg-yellow-500"></div>
+    {logo_url ? (
+      <img src={logo_url} alt={nombre} class="h-16 w-16 rounded object-cover" />
+    ) : (
+      <div class="h-16 w-16 rounded bg-red-600/30"></div>
+    )}
+    <div>
+      <p class="text-xs text-zinc-400 uppercase tracking-widest">Sponsor Principal</p>
+      <p class="text-3xl font-black text-white">{nombre}</p>
+    </div>
+  </div>
+</a>

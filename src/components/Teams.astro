@@ -1,0 +1,34 @@
+---
+import { createClient } from "@supabase/supabase-js";
+import TeamCard from "../components/TeamCard.astro";
+
+const supabase = createClient(
+  import.meta.env.SUPABASE_URL,
+  import.meta.env.SUPABASE_KEY
+);
+
+const { data: equipos } = await supabase
+  .from("equipos")
+  .select("*")
+  .order("año", { ascending: false });  // ordenados por año, más nuevo primero
+
+---
+
+<section class="text-white">
+      <div class="flex items-center gap-4 py-3">
+          <div class="h-8 w-1.5 bg-yellow-500"></div>
+          <h1 class="text-4xl font-black uppercase tracking-wide">Equipos</h1>
+      </div>
+    <div class="mt-4">
+      <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+        {equipos?.map((equipo: any) => (
+          <TeamCard 
+            nombre={equipo.nombre} 
+            año={equipo.año} 
+            rol={equipo.rol} 
+            logo_url={equipo.logo_url}
+          />
+        ))}
+      </div>
+    </div>
+</section>

@@ -51,7 +51,7 @@ const partidasConMapa = await Promise.all(
 ---
 
 <section class=" text-white">
-  <div class="mx-auto max-w-6xl my-5">
+  <div class="mx-auto max-w-6xl">
 
     <div class="flex items-center gap-4">
         <div class="h-8 w-1.5 bg-yellow-500"></div>
@@ -78,11 +78,11 @@ const partidasConMapa = await Promise.all(
         </div>
     </div>
 
-    <div class="flex items-center gap-4 py-6">
+    <div class="flex items-center gap-4 py-3">
         <div class="h-8 w-1.5 bg-yellow-500"></div>
         <h1 class="text-4xl font-black uppercase tracking-wide">últimas Partidas</h1>
     </div>
-      <div class="mt-8 grid grid-cols-2 gap-4 md:grid-cols-5">
+      <div class="mt-4 grid grid-cols-2 gap-4 md:grid-cols-5">
         {partidasConMapa.map((partida: any) => {
           const enF1 = partida.teams?.faction1?.players?.some((p: any) => p.player_id === playerId);
           const miFaccion = enF1 ? "faction1" : "faction2";

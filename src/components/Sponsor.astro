@@ -1,0 +1,45 @@
+---
+import { createClient } from "@supabase/supabase-js";
+import SponsorPrincipal from "../components/SponsorPrincipal.astro";
+import SponsorColaborador from "../components/SponsorColaborador.astro";
+
+const supabase = createClient(
+  import.meta.env.SUPABASE_URL,
+  import.meta.env.SUPABASE_KEY
+);
+
+const { data: sponsors } = await supabase
+  .from("sponsors")
+  .select("*");
+
+const principal = sponsors?.find((s: any) => s.tipo === "principal");
+const colaboradores = sponsors?.filter((s: any) => s.tipo === "colaborador");
+---
+
+<section class="text-white">
+      <div class="flex items-center gap-4 py-3">
+          <div class="h-8 w-1.5 bg-yellow-500"></div>
+          <h1 class="text-4xl font-black uppercase tracking-wide">Sponsors</h1>
+      </div>
+    <div class="mt-4">
+        {principal && (
+        <SponsorPrincipal 
+            nombre={principal.nombre}
+            logo_url={principal.logo_url}
+            link={principal.link}
+        />
+        )}
+
+        <!-- COLABORADORES -->
+        <div class="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4">
+        {colaboradores?.map((sponsor: any) => (
+            <SponsorColaborador
+            nombre={sponsor.nombre}
+            logo_url={sponsor.logo_url}
+            link={sponsor.link}
+            />
+        ))}
+        </div>
+    </div>
+</section>
+

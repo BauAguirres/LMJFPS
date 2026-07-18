@@ -1,0 +1,52 @@
+---
+const { contact } = Astro.props;
+
+const sociales = [
+  { nombre: "Discord", link: contact.discord_link, icon: "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" },
+  { nombre: "Twitter", link: contact.twitter_link, icon: "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/x.svg" },
+  { nombre: "Instagram", link: contact.instagram_link, icon: "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" },
+  { nombre: "YouTube", link: contact.youtube_link, icon: "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" },
+  { nombre: "Twitch", link: contact.twitch_link, icon: "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitch.svg" },
+  { nombre: "Kick", link: contact.kick_link, icon: "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/kickstarter.svg" },
+].filter(red => red.link);
+---
+
+<section class="my-16 bg-zinc-900/50 py-16">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="flex items-center gap-4 mb-12">
+      <div class="h-8 w-1.5 bg-yellow-500"></div>
+      <h1 class="text-4xl font-black uppercase tracking-wide text-white">Contacto</h1>
+    </div>
+
+    <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+      <!-- Email y mensaje -->
+      <div class="border border-red-500/30 bg-zinc-800 p-8 rounded-lg">
+        <p class="text-sm uppercase tracking-widest text-yellow-500 font-bold mb-2">Escribime</p>
+        <a href={`mailto:${contact.email}`} class="text-2xl font-bold text-white hover:text-red-400 transition">
+          {contact.email}
+        </a>
+        <p class="text-zinc-400 mt-4 text-sm">Para colaboraciones, eventos o consultas profesionales.</p>
+      </div>
+
+    </div>
+
+    <!-- Redes sociales -->
+    <div class="mt-12">
+      <p class="text-sm uppercase tracking-widest text-yellow-500 font-bold mb-6">Seguime en</p>
+        
+        <div class="grid grid-cols-2 gap-4 md:grid-cols-6">
+        {sociales.map((red) => (
+            <a 
+            href={red.link}
+            target="_blank"
+            class="flex flex-col items-center gap-2 border border-red-500/20 bg-zinc-800 p-4 rounded-lg hover:border-red-500/50 hover:bg-zinc-700 transition"
+            >
+            <img src={red.icon} alt={red.nombre} class="w-8 h-8 invert" />
+            <span class="text-xs font-bold text-white">{red.nombre}</span>
+            </a>
+        ))}
+        </div>
+
+    </div>
+  </div>
+</section>

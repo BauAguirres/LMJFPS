@@ -1,0 +1,141 @@
+---
+// No validar en el frontmatter, esto es una página pública
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin - LMJFPS</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { 
+        background: linear-gradient(135deg, #0a0203 0%, #140406 100%);
+        color: #fff; 
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+      .login-container {
+        width: 100%;
+        max-width: 400px;
+        background: #1c0709;
+        border: 1px solid rgba(255, 30, 60, 0.3);
+        border-radius: 12px;
+        padding: 40px;
+      }
+      h1 { 
+        font-size: 32px; 
+        margin-bottom: 30px; 
+        text-align: center;
+        font-weight: 900;
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+      label {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid rgba(255, 30, 60, 0.3);
+        background: #0a0203;
+        color: #fff;
+        border-radius: 6px;
+        font-size: 14px;
+      }
+      input:focus {
+        outline: none;
+        border-color: #FF1E3C;
+        box-shadow: 0 0 0 2px rgba(255, 30, 60, 0.1);
+      }
+      button {
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(135deg, #FF1E3C 0%, #B00020 100%);
+        border: none;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: brightness 0.2s;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      button:hover { brightness: 1.1; }
+      .error {
+        color: #ff6b6b;
+        font-size: 12px;
+        margin-top: 10px;
+      }
+      .success {
+        color: #51cf66;
+        font-size: 12px;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <h1>LMJ<span style="color: #FF1E3C;">FPS</span></h1>
+      <p style="text-align: center; color: #9c8a8c; margin-bottom: 30px;">Panel de Administrador</p>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+
+        <button type="submit">Ingresar</button>
+        <div id="message"></div>
+      </form>
+    </div>
+
+    <script>
+      const form = document.getElementById("loginForm");
+      const messageDiv = document.getElementById("message");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        try {
+          const response = await fetch("/api/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            messageDiv.innerHTML = '<p class="success">✓ Ingresando...</p>';
+            window.location.href = "/admin";
+          } else {
+            messageDiv.innerHTML = `<p class="error">✗ ${data.error || "Error al ingresar"}</p>`;
+          }
+        } catch (err) {
+          messageDiv.innerHTML = '<p class="error">✗ Error de conexión</p>';
+        }
+      });
+    </script>
+  </body>
+</html>

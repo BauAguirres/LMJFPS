@@ -1,0 +1,30 @@
+---
+export const prerender = false;
+
+const authToken = Astro.cookies.get("auth_token")?.value;
+if (!authToken) {
+  return Astro.redirect("/login");
+}
+
+import DashboardAdmin from '../components/dashboardAdmin.tsx';
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin - LMJFPS</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { 
+        background: #0a0203; 
+        color: #fff; 
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <DashboardAdmin client:load />
+  </body>
+</html>

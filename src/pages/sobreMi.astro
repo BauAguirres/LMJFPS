@@ -1,0 +1,35 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import { createClient } from "@supabase/supabase-js";
+import AboutMe from "../components/AboutMe.astro";
+import FAQ from "../components/Faq.astro";
+import Footer from "../components/Footer.astro";
+
+const supabase = createClient(
+  import.meta.env.SUPABASE_URL,
+  import.meta.env.SUPABASE_KEY
+);
+
+
+const { data: aboutData } = await supabase
+  .from("about_me")
+  .select("*")
+  .single();  // una sola fila
+
+const { data: faqData } = await supabase
+  .from("faq")
+  .select("*")
+  .order("orden", { ascending: true });
+---
+
+<Layout>
+	<div class="bg-black py-3">
+		<div class="mx-auto max-w-6xl px-6 bg-black">
+			<Header />
+		</div>
+      <AboutMe about={aboutData} />
+      <FAQ preguntas={faqData} />
+			<Footer />
+	</div>
+</Layout>

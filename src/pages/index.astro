@@ -3,7 +3,21 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
-import Stats from "../components/Stats.astro";
+import Sponsor from "../components/Sponsor.astro";
+import Referidos from "../components/Referidos.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  import.meta.env.SUPABASE_URL,
+  import.meta.env.SUPABASE_KEY
+);
+
+const { data: contactData } = await supabase
+  .from("contact_info")
+  .select("*")
+  .single();
 ---
 <Layout>
 	<div class="bg-black py-3">
@@ -12,7 +26,10 @@ import Stats from "../components/Stats.astro";
 		</div>
 		<Hero />
 		<div class="mx-auto max-w-6xl px-6 bg-black">
-			<Stats />
+			<Sponsor />
+			<Referidos />
+			<Contact contact={contactData} />
 		</div>
+		<Footer />
 	</div>
 </Layout>

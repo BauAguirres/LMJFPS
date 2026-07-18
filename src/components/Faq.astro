@@ -1,0 +1,22 @@
+---
+const { preguntas } = Astro.props;
+---
+<section class="my-16">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="flex items-center gap-4 mb-12">
+      <div class="h-8 w-1.5 bg-yellow-500"></div>
+      <h1 class="text-4xl font-black uppercase tracking-wide text-white">Preguntas Frecuentes</h1>
+    </div>
+
+    <div class="space-y-4">
+      {preguntas?.map((item: any) => (
+        <details class="border border-red-500/30 bg-zinc-900 p-4 rounded">
+          <summary class="cursor-pointer font-bold text-white uppercase tracking-wide">
+            {item.pregunta}
+          </summary>
+          <p class="mt-4 text-zinc-300 text-sm leading-relaxed">{item.respuesta}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
