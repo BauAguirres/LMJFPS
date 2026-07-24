@@ -1,21 +1,21 @@
 ---
 const { about } = Astro.props;
 ---
-<section class="my-16">
-  <div class="mx-auto max-w-6xl px-6">
-    <div class="flex items-center gap-4 mb-8">
+<section class="my-8 md:my-16">
+  <div class="mx-auto max-w-6xl px-4 md:px-6">
+    <div class="flex items-center gap-4 mb-6 md:mb-8">
       <div class="h-8 w-1.5 bg-yellow-500"></div>
-      <h1 class="text-4xl font-black uppercase tracking-wide text-white">{about.titulo}</h1>
+      <h1 class="text-2xl md:text-4xl font-black uppercase tracking-wide text-white">{about.titulo}</h1>
     </div>
 
-    <div class="grid grid-cols-1 gap-8 md:grid-cols-2 items-center">
+    <div class="grid grid-cols-1 gap-6 md:gap-8 md:grid-cols-2 items-start">
       <div>
-        <p class="text-lg text-zinc-300 leading-relaxed mb-6">{about.bio}</p>
+        <p class="text-base md:text-lg text-zinc-300 leading-relaxed mb-4 md:mb-6">{about.bio}</p>
         <div class="space-y-3">
-          <p class="text-sm text-zinc-400">
+          <p class="text-xs md:text-sm text-zinc-400">
             <span class="font-bold text-white">{about.años_streameando} años</span> streameando
           </p>
-          <p class="text-sm text-zinc-400">
+          <p class="text-xs md:text-sm text-zinc-400">
             <span class="font-bold text-yellow-500">Objetivo:</span> {about.objetivo}
           </p>
         </div>
@@ -24,7 +24,7 @@ const { about } = Astro.props;
         <img 
           src={about.foto_url} 
           alt="Foto del streamer"
-          class="rounded-lg border border-red-500/30 w-full h-96 object-cover"
+          class="rounded-lg border border-red-500/30 w-full h-64 md:h-96 object-cover"
         />
       )}
     </div>

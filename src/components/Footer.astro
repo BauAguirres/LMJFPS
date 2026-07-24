@@ -14,15 +14,15 @@ const sociales = [
 ].filter(red => red.link);
 ---
 
-<footer class="border-t border-red-500/15 bg-zinc-950 text-white mt-24">
+<footer class="border-t border-red-500/15 bg-zinc-950 text-white mt-16 md:mt-24">
   <div class="mx-auto max-w-6xl px-4 md:px-6 py-8 md:py-16">
     
     <!-- Contenido principal -->
-    <div class="grid grid-cols-1 gap-8 md:gap-12 md:grid-cols-3 mb-12">
+    <div class="grid grid-cols-1 gap-6 md:gap-12 md:grid-cols-3 mb-8 md:mb-12">
       
       <!-- Logo y descripción -->
-      <div>
-        <h3 class="text-lg font-black uppercase tracking-wider mb-4">
+      <div class="text-center md:text-left">
+        <h3 class="text-base md:text-lg font-black uppercase tracking-wider mb-3 md:mb-4">
           LMJ<span class="text-red-500">FPS</span>
         </h3>
         <p class="text-xs md:text-sm text-zinc-400 leading-relaxed">
@@ -31,19 +31,19 @@ const sociales = [
       </div>
 
       <!-- Enlaces rápidos -->
-      <div>
-        <p class="text-xs md:text-sm uppercase tracking-widest font-bold text-yellow-500 mb-4">Navegación</p>
+      <div class="text-center md:text-left">
+        <p class="text-xs uppercase tracking-widest font-bold text-yellow-500 mb-3 md:mb-4">Navegación</p>
         <ul class="space-y-2 text-xs md:text-sm text-zinc-400">
           <li><a href="/" class="hover:text-red-400 transition">Inicio</a></li>
-          <li><a href="/#referidos" class="hover:text-red-400 transition">Referidos</a></li>
+          <li><a href="/#estadisticas" class="hover:text-red-400 transition">Estadísticas</a></li>
           <li><a href="/#sponsors" class="hover:text-red-400 transition">Sponsors</a></li>
           <li><a href="/#contacto" class="hover:text-red-400 transition">Contacto</a></li>
         </ul>
       </div>
 
       <!-- Redes sociales -->
-      <div>
-        <p class="text-xs md:text-sm uppercase tracking-widest font-bold text-yellow-500 mb-4">Seguime</p>
+      <div class="text-center md:text-left">
+        <p class="text-xs uppercase tracking-widest font-bold text-yellow-500 mb-3 md:mb-4">Seguime</p>
         <ul class="space-y-2 text-xs md:text-sm text-zinc-400">
           {sociales.map((red) => (
             <li>
@@ -58,11 +58,11 @@ const sociales = [
     </div>
 
     <!-- Divider -->
-    <div class="border-t border-red-500/15 py-8">
+    <div class="border-t border-red-500/15 py-6 md:py-8">
       
       <!-- Descargo de responsabilidad (si hay) -->
       {descargo && (
-        <p class="text-xs text-zinc-500 text-center mb-6">
+        <p class="text-xs text-zinc-500 text-center mb-4 md:mb-6 leading-relaxed px-2">
           {descargo}
         </p>
       )}
@@ -70,7 +70,7 @@ const sociales = [
       <!-- Copyright -->
       <div class="text-center text-xs text-zinc-500">
         <p>© {año} LMJFPS. Todos los derechos reservados.</p>
-        <p class="mt-2">Hecho con ❤️ desde Argentina</p>
+        <p class="mt-1 md:mt-2">Hecho con ❤️ desde Argentina</p>
       </div>
 
     </div>

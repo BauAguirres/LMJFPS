@@ -11,6 +11,10 @@ const supabase = createClient(
   import.meta.env.SUPABASE_KEY
 );
 
+const { data: contactData } = await supabase
+  .from("contact_info")
+  .select("*")
+  .single();
 
 const { data: aboutData } = await supabase
   .from("about_me")
@@ -30,6 +34,6 @@ const { data: faqData } = await supabase
 		</div>
       <AboutMe about={aboutData} />
       <FAQ preguntas={faqData} />
-			<Footer />
+		  <Footer footer={null} contact={contactData} />
 	</div>
 </Layout>

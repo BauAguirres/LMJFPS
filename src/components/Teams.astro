@@ -10,17 +10,18 @@ const supabase = createClient(
 const { data: equipos } = await supabase
   .from("equipos")
   .select("*")
-  .order("año", { ascending: false });  // ordenados por año, más nuevo primero
-
+  .order("año", { ascending: false });
 ---
 
-<section class="text-white">
-      <div class="flex items-center gap-4 py-3">
-          <div class="h-8 w-1.5 bg-yellow-500"></div>
-          <h1 class="text-4xl font-black uppercase tracking-wide">Equipos</h1>
-      </div>
-    <div class="mt-4">
-      <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+<section class="text-white my-8 md:my-16">
+  <div class="mx-auto max-w-6xl px-4 md:px-6">
+    <div class="flex items-center gap-4">
+      <div class="h-8 w-1.5 bg-yellow-500"></div>
+      <h1 class="text-2xl md:text-4xl font-black uppercase tracking-wide">Equipos</h1>
+    </div>
+
+    <div class="mt-6 md:mt-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
         {equipos?.map((equipo: any) => (
           <TeamCard 
             nombre={equipo.nombre} 
@@ -31,4 +32,5 @@ const { data: equipos } = await supabase
         ))}
       </div>
     </div>
+  </div>
 </section>
