@@ -11,42 +11,40 @@ const sociales = [
 ].filter(red => red.link);
 ---
 
-<section class="my-16 bg-zinc-900/50 py-16">
-  <div class="mx-auto max-w-6xl px-6">
-    <div class="flex items-center gap-4 mb-12">
+<section class="my-8 md:my-16 bg-zinc-900/50 py-8 md:py-16" id="contacto">
+  <div class="mx-auto max-w-6xl px-4 md:px-6">
+    <div class="flex items-center gap-4 mb-8 md:mb-12">
       <div class="h-8 w-1.5 bg-yellow-500"></div>
-      <h1 class="text-4xl font-black uppercase tracking-wide text-white">Contacto</h1>
+      <h1 class="text-2xl md:text-4xl font-black uppercase tracking-wide text-white">Contacto</h1>
     </div>
 
-    <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+    <div class="grid grid-cols-1 gap-6 md:gap-8 md:grid-cols-2">
       <!-- Email y mensaje -->
-      <div class="border border-red-500/30 bg-zinc-800 p-8 rounded-lg">
-        <p class="text-sm uppercase tracking-widest text-yellow-500 font-bold mb-2">Escribime</p>
-        <a href={`mailto:${contact.email}`} class="text-2xl font-bold text-white hover:text-red-400 transition">
+      <div class="border border-red-500/30 bg-zinc-800 p-4 md:p-8 rounded-lg">
+        <p class="text-xs md:text-sm uppercase tracking-widest text-yellow-500 font-bold mb-2">Escribime</p>
+        <a href={`mailto:${contact.email}`} class="text-lg md:text-2xl font-bold text-white hover:text-red-400 transition break-all">
           {contact.email}
         </a>
-        <p class="text-zinc-400 mt-4 text-sm">Para colaboraciones, eventos o consultas profesionales.</p>
+        <p class="text-zinc-400 mt-4 text-xs md:text-sm">Para colaboraciones, eventos o consultas profesionales.</p>
       </div>
-
     </div>
 
     <!-- Redes sociales -->
-    <div class="mt-12">
-      <p class="text-sm uppercase tracking-widest text-yellow-500 font-bold mb-6">Seguime en</p>
-        
-        <div class="grid grid-cols-2 gap-4 md:grid-cols-6">
+    <div class="mt-8 md:mt-12">
+      <p class="text-xs md:text-sm uppercase tracking-widest text-yellow-500 font-bold mb-4 md:mb-6">Seguime en</p>
+      
+      <div class="grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-4">
         {sociales.map((red) => (
-            <a 
+          <a 
             href={red.link}
             target="_blank"
-            class="flex flex-col items-center gap-2 border border-red-500/20 bg-zinc-800 p-4 rounded-lg hover:border-red-500/50 hover:bg-zinc-700 transition"
-            >
-            <img src={red.icon} alt={red.nombre} class="w-8 h-8 invert" />
-            <span class="text-xs font-bold text-white">{red.nombre}</span>
-            </a>
+            class="flex flex-col items-center gap-1 md:gap-2 border border-red-500/20 bg-zinc-800 p-2 md:p-4 rounded-lg hover:border-red-500/50 hover:bg-zinc-700 transition"
+          >
+            <img src={red.icon} alt={red.nombre} class="w-6 md:w-8 h-6 md:h-8 invert" />
+            <span class="text-xs font-bold text-white text-center">{red.nombre}</span>
+          </a>
         ))}
-        </div>
-
+      </div>
     </div>
   </div>
 </section>

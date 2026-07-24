@@ -1,18 +1,44 @@
+---
+---
 
-
-<header class="bg-zinc-950">
-  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-    <a href="index.php">
-        <img src="https://es.vecteezy.com/arte-vectorial/10994239-logotipo-de-adidas-simbolo-negro-icono-de-diseno-de-ropa-ilustracion-de-vector-de-futbol-abstracto-con-fondo-blanco" alt="">
-        <h1 class="text-white text-xl font-bold tracking-wide">LMJ<span class="text-red-500">FPS</span></h1>
+<header class="bg-zinc-950 border-b border-red-500/15">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-4 md:px-6 py-4">
+    <a href="/" class="flex items-center gap-2">
+      <h1 class="text-white text-lg md:text-xl font-bold tracking-wide">LMJ<span class="text-red-500">FPS</span></h1>
     </a>
-    <nav class="flex gap-6 items-center">
-        <a href="index.html" class="text-zinc-400 hover:text-white">Inicio</a>
-        <a href="stats.html" class="text-zinc-400 hover:text-white">Stats</a>
-        <a href="sobreMi.html" class="text-zinc-400 hover:text-white">Sobre Mi</a>
-        <a href="https://kick.com/lmjfps" target="_blank" class="rounded-full bg-gradient-to-br from-[#FF1E3C] to-[#B00020] px-6 py-2 text-sm font-bold uppercase tracking-wide text-white transition hover:brightness-110">
-    Seguir
-    </a>
+    
+    {/* Nav Desktop */}
+    <nav class="hidden md:flex gap-6 md:gap-8 items-center">
+      <a href="/" class="text-zinc-400 hover:text-white text-sm md:text-base transition">Inicio</a>
+      <a href="/stats" class="text-zinc-400 hover:text-white text-sm md:text-base transition">Stats</a>
+      <a href="/sobreMi" class="text-zinc-400 hover:text-white text-sm md:text-base transition">Sobre Mí</a>
+      <a href="https://kick.com/lmjfps" target="_blank" class="rounded-full bg-gradient-to-br from-[#FF1E3C] to-[#B00020] px-4 md:px-6 py-2 text-xs md:text-sm font-bold uppercase tracking-wide text-white transition hover:brightness-110">
+        Seguir
+      </a>
     </nav>
+
+    {/* Menu Mobile */}
+    <div class="md:hidden flex items-center gap-4">
+      <a href="https://kick.com/lmjfps" target="_blank" class="rounded-full bg-gradient-to-br from-[#FF1E3C] to-[#B00020] px-3 py-2 text-xs font-bold uppercase tracking-wide text-white transition hover:brightness-110">
+        Seguir
+      </a>
+      <button id="menu-toggle" class="text-white text-2xl">☰</button>
+    </div>
   </div>
+
+  {/* Menu Mobile Expandido */}
+  <nav id="mobile-menu" class="hidden md:hidden bg-zinc-900 border-t border-red-500/15 px-4 py-4 flex flex-col gap-4">
+    <a href="/" class="text-zinc-300 hover:text-white transition">Inicio</a>
+    <a href="stats" class="text-zinc-300 hover:text-white transition">Stats</a>
+    <a href="sobreMi" class="text-zinc-300 hover:text-white transition">Sobre Mí</a>
+  </nav>
 </header>
+
+<script>
+  const toggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+
+  toggle?.addEventListener("click", () => {
+    menu?.classList.toggle("hidden");
+  });
+</script>

@@ -30,6 +30,6 @@ const { data: contactData } = await supabase
 			<Referidos />
 			<Contact contact={contactData} />
 		</div>
-		<Footer />
+		<Footer footer={null} contact={contactData} />
 	</div>
 </Layout>

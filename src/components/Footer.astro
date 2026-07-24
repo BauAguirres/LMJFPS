@@ -1,32 +1,41 @@
 ---
-const { footer } = Astro.props;
+const { footer, contact } = Astro.props;
 
 const año = footer?.año || new Date().getFullYear();
 const descargo = footer?.descargo_responsabilidad || "Jugá con responsabilidad · Apuestas solo para mayores de 18 años";
+
+const sociales = [
+  { nombre: "Discord", link: contact?.discord_link },
+  { nombre: "Twitter", link: contact?.twitter_link },
+  { nombre: "Instagram", link: contact?.instagram_link },
+  { nombre: "YouTube", link: contact?.youtube_link },
+  { nombre: "Twitch", link: contact?.twitch_link },
+  { nombre: "Kick", link: contact?.kick_link },
+].filter(red => red.link);
 ---
 
 <footer class="border-t border-red-500/15 bg-zinc-950 text-white mt-24">
-  <div class="mx-auto max-w-6xl px-6 py-16">
+  <div class="mx-auto max-w-6xl px-4 md:px-6 py-8 md:py-16">
     
     <!-- Contenido principal -->
-    <div class="grid grid-cols-1 gap-12 md:grid-cols-3 mb-12">
+    <div class="grid grid-cols-1 gap-8 md:gap-12 md:grid-cols-3 mb-12">
       
       <!-- Logo y descripción -->
       <div>
         <h3 class="text-lg font-black uppercase tracking-wider mb-4">
           LMJ<span class="text-red-500">FPS</span>
         </h3>
-        <p class="text-sm text-zinc-400 leading-relaxed">
+        <p class="text-xs md:text-sm text-zinc-400 leading-relaxed">
           Counter-Strike 2, casino y mucho caos. Streamer profesional con nivel 10 en Faceit.
         </p>
       </div>
 
       <!-- Enlaces rápidos -->
       <div>
-        <p class="text-sm uppercase tracking-widest font-bold text-yellow-500 mb-4">Navegación</p>
-        <ul class="space-y-2 text-sm text-zinc-400">
+        <p class="text-xs md:text-sm uppercase tracking-widest font-bold text-yellow-500 mb-4">Navegación</p>
+        <ul class="space-y-2 text-xs md:text-sm text-zinc-400">
           <li><a href="/" class="hover:text-red-400 transition">Inicio</a></li>
-          <li><a href="/#estadisticas" class="hover:text-red-400 transition">Estadísticas</a></li>
+          <li><a href="/#referidos" class="hover:text-red-400 transition">Referidos</a></li>
           <li><a href="/#sponsors" class="hover:text-red-400 transition">Sponsors</a></li>
           <li><a href="/#contacto" class="hover:text-red-400 transition">Contacto</a></li>
         </ul>
@@ -34,12 +43,15 @@ const descargo = footer?.descargo_responsabilidad || "Jugá con responsabilidad 
 
       <!-- Redes sociales -->
       <div>
-        <p class="text-sm uppercase tracking-widest font-bold text-yellow-500 mb-4">Seguime</p>
-        <ul class="space-y-2 text-sm text-zinc-400">
-          <li><a href="https://kick.com/lmjfps" target="_blank" class="hover:text-red-400 transition">Kick</a></li>
-          <li><a href="https://twitch.tv/lmjfps" target="_blank" class="hover:text-red-400 transition">Twitch</a></li>
-          <li><a href="https://discord.gg/lmjfps" target="_blank" class="hover:text-red-400 transition">Discord</a></li>
-          <li><a href="https://twitter.com/lmjfps" target="_blank" class="hover:text-red-400 transition">Twitter</a></li>
+        <p class="text-xs md:text-sm uppercase tracking-widest font-bold text-yellow-500 mb-4">Seguime</p>
+        <ul class="space-y-2 text-xs md:text-sm text-zinc-400">
+          {sociales.map((red) => (
+            <li>
+              <a href={red.link} target="_blank" rel="noopener noreferrer" class="hover:text-red-400 transition">
+                {red.nombre}
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
 
@@ -58,6 +70,7 @@ const descargo = footer?.descargo_responsabilidad || "Jugá con responsabilidad 
       <!-- Copyright -->
       <div class="text-center text-xs text-zinc-500">
         <p>© {año} LMJFPS. Todos los derechos reservados.</p>
+        <p class="mt-2">Hecho con ❤️ desde Argentina</p>
       </div>
 
     </div>
